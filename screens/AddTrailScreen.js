@@ -62,7 +62,7 @@ const AddTrailScreen = props =>{
         // console.log("HI"+JSON.stringify(coords));
         await Location.startLocationUpdatesAsync(LOCATION_TSK,{
           accuracy: Location.Accuracy.Highest,
-          distanceInterval:3,
+          distanceInterval:5,
           foregroundService: {
             notificationTitle: 'Using your location',
             notificationBody: 'To turn off, go back to the app and end trail.',
