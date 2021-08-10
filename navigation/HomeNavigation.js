@@ -11,7 +11,7 @@ import {createAppContainer} from 'react-navigation';
 const HomeNavigation = createStackNavigator({
   'Home': HomeScreen,
   'Add Trail':AddTrailScreen,
-  'Search Trail':SearchTrailScreen,
+  'Recent Trails':SearchTrailScreen,
   'Settings':SettingsScreen
 },{defaultNavigationOptions:{
   headerStyle:{

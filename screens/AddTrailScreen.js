@@ -48,18 +48,20 @@ const AddTrailScreen = props =>{
   const [errorMsg, setErrorMsg] = useState(null);
   const [isTrack,setIsTrack] = useState(false);
   useEffect(() => {
-    getPermisson();
       if(!isTrack) return;
       (async () => {
+        let servEnable= await Location.hasServicesEnabledAsync();
+        console.log(servEnable)
+        if(!servEnable){
+          getPermisson();
+          setIsTrack(false);
+        }
         let { status } = await Location.requestBackgroundPermissionsAsync();
         if (status !== 'granted') {
           setErrorMsg('Permission to access location was denied');
           return;
         }
-        // let coords = await Location.getCurrentPositionAsync({
-        //   accuracy:Location.Accuracy.Highest
-        // })
-        // console.log("HI"+JSON.stringify(coords));
+      
         await Location.startLocationUpdatesAsync(LOCATION_TSK,{
           accuracy: Location.Accuracy.Highest,
           distanceInterval:5,
@@ -105,8 +107,9 @@ const AddTrailScreen = props =>{
       <Button title="End Trail" onPress={stopTracking}/>
     </View>
     <Text>{granted}</Text>
-    <MapView style={styles.map} customMapStyle={MapStyle.mapStyle}>
-    <Marker coordinate={{latitude:38.858357,longitude:-77.148599,latitudeDelta:0.08,longitudeDelta:0.08}} pinColor="green"/>
+    <MapView style={styles.map} customMapStyle={MapStyle.mapStyle} 
+    initialRegion={{latitude:38.8583357, longitude:-77.148599, latitudeDelta:0.08,longitudeDelta:0.08}}>
+    <Marker coordinate={{latitude:38.858357,longitude:-77.148599}} pinColor="green"/>
       <Polyline
           coordinates={latLong}
           strokeColor="#00730f" // fallback for when `strokeColors` is not supported by the map-provider

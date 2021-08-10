@@ -19,9 +19,9 @@ const HomeScreen = props =>{
               {routeName: 'Add Trail'});
               //can pass in params:{ name_param: val_parm} to be used in the next screen
             break;
-          case 'searchT':
+          case 'recentT':
             props.navigation.navigate(
-              {routeName: 'Search Trail'});
+              {routeName: 'Recent Trails'});
             break;
           case 'sett':
             props.navigation.navigate(
