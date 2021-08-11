@@ -42,6 +42,9 @@ const AddTrailScreen = props =>{
   //Start trail will exutcte geolocation tracking
   //stop trail stops the geolocation and marks the end
   // of trail
+  const curCoords= props.navigation.getParam('coord');//TODO fix if null value
+  
+  //console.log(curCoords.coords["latitude"]);
   const locStatus ={latitude:null,longitude:null};//holds lat and long values
   const [location, setLocation] = useState([]);//send to database
   const [latLong, setLatLong] = useState([])//use to plot in the map
@@ -107,15 +110,20 @@ const AddTrailScreen = props =>{
       <Button title="End Trail" onPress={stopTracking}/>
     </View>
     <Text>{granted}</Text>
+    <View style={styles.mapS}>
     <MapView style={styles.map} customMapStyle={MapStyle.mapStyle} 
-    initialRegion={{latitude:38.8583357, longitude:-77.148599, latitudeDelta:0.08,longitudeDelta:0.08}}>
-    <Marker coordinate={{latitude:38.858357,longitude:-77.148599}} pinColor="green"/>
+    initialRegion={{latitude:curCoords.coords["latitude"], longitude:curCoords.coords["longitude"], 
+    latitudeDelta:0.005,longitudeDelta:0.005}}>
+    <Marker coordinate={{latitude:curCoords.coords["latitude"],
+    longitude:curCoords.coords["longitude"]}} 
+    pinColor="green"/>
       <Polyline
           coordinates={latLong}
           strokeColor="#00730f" // fallback for when `strokeColors` is not supported by the map-provider
           strokeWidth={4}
         />
     </MapView>
+    </View>
     <ScrollView>
     {location.map((loc)=>{
       return (
@@ -141,7 +149,15 @@ const styles = StyleSheet.create({
   },
   map:{
     width:300,
-    height:450
+    height:450,
+  },
+  mapS:{
+    width:300,
+    height:450,
+    borderRadius:20,
+    overflow:'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
 
