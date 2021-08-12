@@ -102,14 +102,6 @@ const AddTrailScreen = props =>{
   console.log(JSON.stringify(latLong))
   return(
   <View style={styles.screen}>
-    <View style={styles.buttonS}>
-    <Button title={isTrack ? 'Stop Trail' : 'Start Trail'}
-    onPress={()=> {setIsTrack(!isTrack)}}/>
-    </View>
-    <View>
-      <Button title="End Trail" onPress={stopTracking}/>
-    </View>
-    <Text>{granted}</Text>
     <View style={styles.mapS}>
     <MapView style={styles.map} customMapStyle={MapStyle.mapStyle} 
     initialRegion={{latitude:curCoords.coords["latitude"], longitude:curCoords.coords["longitude"], 
@@ -124,6 +116,14 @@ const AddTrailScreen = props =>{
         />
     </MapView>
     </View>
+    <View style={styles.buttonS}>
+    <Button title={isTrack ? 'Stop Trail' : 'Start Trail'}
+    onPress={()=> {setIsTrack(!isTrack)}}/>
+    </View>
+    <View>
+      <Button title="End Trail" onPress={stopTracking}/>
+    </View>
+    <Text>{granted}</Text>
     <ScrollView>
     {location.map((loc)=>{
       return (
@@ -141,7 +141,7 @@ const AddTrailScreen = props =>{
 const styles = StyleSheet.create({
   screen:{
     flex: 1,
-    paddingTop:5,
+    paddingTop:20,
     alignItems: 'center'
   },
   buttonS:{

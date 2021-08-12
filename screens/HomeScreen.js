@@ -59,7 +59,6 @@ const HomeScreen = props =>{
   useEffect(()=>{
     (async()=>{
       let servEnable= await Location.hasServicesEnabledAsync();
-        console.log(servEnable)
         if(!servEnable){
           getPermisson();
         }else{
@@ -67,7 +66,6 @@ const HomeScreen = props =>{
             accuracy:Location.Accuracy.Highest
           });
           locStatus.coords= coords;
-          console.log(JSON.stringify(coords));
 
         }
     })();
